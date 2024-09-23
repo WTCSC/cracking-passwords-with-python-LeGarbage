@@ -14,7 +14,7 @@ def main():
     words = open(args.word_file, "r")
     password_list = passwords.readlines() # Splits the files into lists of lines
     word_list = words.readlines()
-    hashed_words = [hash_password(i.strip()) for i in word_list] # Hashes each word in the word list so they can be compared to the hashed passwords later
+    hashed_words = [hash_password(i.strip(), "sha256") for i in word_list] # Hashes each word in the word list so they can be compared to the hashed passwords later
     # failed_passwords = 0 # Counts the number of passwords that could not be cracked
     for i in password_list:
         # timer = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
@@ -33,8 +33,7 @@ def main():
     words.close()
 
 
-def hash_password(password):
-    algorithm = "sha256"
+def hash_password(password, algorithm):
     if algorithm == "sha256":
         sha256_hash = hashlib.sha256()
         sha256_hash.update(password.encode())
