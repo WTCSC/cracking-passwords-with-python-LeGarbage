@@ -37,16 +37,15 @@ def hash_password(password, algorithm):
     if algorithm == "sha256":
         sha256_hash = hashlib.sha256()
         sha256_hash.update(password.encode())
-        hashed = sha256_hash.hexdigest()
+        return sha256_hash.hexdigest()
     elif algorithm == "sha512":
         sha512_hash = hashlib.sha512()
         sha512_hash.update(password.encode())
-        hashed = sha512_hash.hexdigest()
+        return sha512_hash.hexdigest()
     elif algorithm == "md5":
         md5_hash = hashlib.md5()
         md5_hash.update(password.encode())
-        hashed = md5_hash.hexdigest()
-    return hashed
+        return md5_hash.hexdigest()
 
 
 if __name__ == "__main__":
