@@ -20,8 +20,11 @@ def main():
         timer = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
         username, password = i.strip().split(":") # Splits the entry in the password list into the username and password
         if password in hashed_words: # If the password is found in the hashed words list,
-            elapsed_time = f" ({((time.clock_gettime_ns(time.CLOCK_MONOTONIC) - timer) * 1e-9):f} seconds)" # Then find out how long it took to find,
-            print(f"{username}:{word_list[hashed_words.index(password)].strip()}")#{elapsed_time if args.verbosity else ""}") # And find it in the unhashed words list and print it along with the username and the time if verbosity is flagged
+            if not args.verbosity:
+                elapsed_time = ""
+            else:
+                elapsed_time = f" ({((time.clock_gettime_ns(time.CLOCK_MONOTONIC) - timer) * 1e-9):f} seconds)" # Then find out how long it took to find,
+            print(f"{username}:{word_list[hashed_words.index(password)].strip()}{elapsed_time}") # And find it in the unhashed words list and print it along with the username and the time if verbosity is flagged
         else: # If the password is not one of the hashed words, 
             failed_passwords += 1 # then increment the fail counter
     if args.verbosity: # If verbosity is flagged,
