@@ -15,15 +15,15 @@ def main():
     password_list = passwords.readlines() # Splits the files into lists of lines
     word_list = words.readlines()
     hashed_words = [hash_password(i.strip(), "sha256") for i in word_list] # Hashes each word in the word list so they can be compared to the hashed passwords later
-    failed_passwords = 0 # Counts the number of passwords that could not be cracked
+    # failed_passwords = 0 # Counts the number of passwords that could not be cracked
     for i in password_list:
-        timer = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
+        # timer = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
         username, password = i.strip().split(":") # Splits the entry in the password list into the username and password
         if password in hashed_words: # If the password is found in the hashed words list,
-            elapsed_time = f" ({((time.clock_gettime_ns(time.CLOCK_MONOTONIC) - timer) * 1e-9):f} seconds)" # Then find out how long it took to find,
+            # elapsed_time = f" ({((time.clock_gettime_ns(time.CLOCK_MONOTONIC) - timer) * 1e-9):f} seconds)" # Then find out how long it took to find,
             print(f"{username}:{word_list[hashed_words.index(password)].strip()}{elapsed_time if False else ""}") # And find it in the unhashed words list and print it along with the username and the time if verbosity is flagged
-        else: # If the password is not one of the hashed words, 
-            failed_passwords += 1 # then increment the fail counter
+        # else: # If the password is not one of the hashed words, 
+            # failed_passwords += 1 # then increment the fail counter
     # if args.verbosity: # If verbosity is flagged,
     #     if failed_passwords == len(password_list): # Then if no passwords could be cracked,
     #         print("No passwords could be cracked") # Print that no passwords could be cracked
