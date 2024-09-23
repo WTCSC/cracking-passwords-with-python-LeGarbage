@@ -8,6 +8,7 @@ def main():
     parser.add_argument("word_file", help="The file that contains the words used to crack the passwords") # Positional argument
     parser.add_argument("-v", "--verbosity", action="store_true", help="Adds additional information about how long it took to crack each password and how many passwords couldn't be cracked") # Flag
     parser.add_argument("-a", "--algorithm", choices=["sha256", "sha512", "md5"], default="sha256", help="The hashing algorithm to be used to crack the passwords") # Optional argument limited to choices
+    
     args = parser.parse_args()
     passwords = open(args.password_file, "r") # Opens the files
     words = open(args.word_file, "r")
@@ -41,6 +42,7 @@ def hash_password(password, algorithm):
         hashed = hashlib.md5()
     hashed.update(password.encode())
     return hashed.hexdigest()
+
 
 if __name__ == "__main__":
     main()
